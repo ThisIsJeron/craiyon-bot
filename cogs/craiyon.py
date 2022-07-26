@@ -44,11 +44,9 @@ class Craiyon(commands.Cog):
             self.running = False
             self.image_context = None
 
-
     @commands.Cog.listener()
     async def on_ready(self):
         self._draw.start()
-
 
     @commands.command(name="draw", aliases=["d", "craiyon"])
     async def draw(self, ctx: commands.Context) -> None:
