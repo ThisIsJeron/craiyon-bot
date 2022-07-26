@@ -11,10 +11,8 @@ GENERATED_FILE_NAME = os.getenv("GENERATED_FILE_NAME", "latest_craiyon.jpg")
 
 file_path = os.path.join('image', 'latest_craiyon.jpg')
 
-
 class NoImageError(Exception):
     pass
-
 
 async def generate_image(search_query: str) -> str:
     data = {"prompt": search_query}
@@ -52,7 +50,7 @@ async def generate_image(search_query: str) -> str:
             borderType=cv2.BORDER_CONSTANT, 
             value=[0, 0, 0]
         )
-
+        '''
         # Combine images
         match i:
             case 0:  # First image
@@ -65,9 +63,19 @@ async def generate_image(search_query: str) -> str:
                 image_row = image
             case _:  # 1 | 2 | 4 | 5 | 7 | 8
                 image_row = cv2.hconcat([image_row, image])
+        '''
+        if i == 0:
+            image_row = image
+        elif i == 3:
+            compound_image = image_row
+            image_row = image
+        elif i == 6:
+            compound_image = cv2.vconcat([compound_image, image_row])
+            image_row = image
+        else:
+            image_row = cv2.hconcat([image_row, image])
+
 
     compound_image = cv2.vconcat([compound_image, image_row])
-
     cv2.imwrite(file_path, compound_image)
-
     return file_path
