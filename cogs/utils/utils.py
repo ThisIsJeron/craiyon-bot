@@ -75,7 +75,7 @@ async def generate_image(search_query: str) -> str:
         else:
             image_row = cv2.hconcat([image_row, image])
 
-
     compound_image = cv2.vconcat([compound_image, image_row])
+
     cv2.imwrite(file_path, compound_image)
     return file_path
