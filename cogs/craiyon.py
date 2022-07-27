@@ -49,8 +49,8 @@ class Craiyon(commands.Cog):
             self.image_context = None
             self.prompt = None
 
-    @commands.command(name="draw2", aliases=["d", "craiyon"])
-    async def draw2(self, ctx: commands.Context) -> None:
+    @commands.command(name="draw", aliases=["d", "craiyon"])
+    async def draw(self, ctx: commands.Context) -> None:
         """
         Generates images using https://craiyon.com
         e.g `c!draw red tree` will generate a red tree using https://craiyon.com,
@@ -63,8 +63,8 @@ class Craiyon(commands.Cog):
         else:
             await message.channel.send('Bot currently in use. Please wait...')
 
-    @commands.slash_command(name="draw", description="attempt to make slash command for draw")
-    async def draw(self, ctx: discord.ApplicationContext, prompt: discord.Option(str)):
+    @commands.slash_command(name="drawing", description="slash command for draw")
+    async def drawing(self, ctx: discord.ApplicationContext, prompt: discord.Option(str)):
         if not self.running:
             self.running = True
             craiyon_embed = discord.Embed(
