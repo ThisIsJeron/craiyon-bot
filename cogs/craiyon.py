@@ -55,7 +55,7 @@ class Craiyon(commands.Cog):
         Generates images using https://craiyon.com
         e.g `c!draw red tree` will generate a red tree using https://craiyon.com,
         """
-        
+
         message = ctx.message
 
         if not self.running:
@@ -66,6 +66,7 @@ class Craiyon(commands.Cog):
     @commands.slash_command(name="draw", description="attempt to make slash command for draw")
     async def draw(self, ctx: discord.ApplicationContext, prompt: discord.Option(str)):
         if not self.running:
+            self.running = True
             craiyon_embed = discord.Embed(
                 title=f"Generating {prompt}",
                 url="https://craiyon.com",
